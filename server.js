@@ -36,4 +36,3 @@ app.listen(port,()=>{
     console.log('Server Started on http://localhost:4000')
 })
 
-export default app;
