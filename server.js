@@ -7,9 +7,6 @@ import cartRouter from "./routes/cartRoute.js"
 import 'dotenv/config'
 import orderRouter from "./routes/orderRoute.js"
 
-
-
-
 // app config
 const app = express()
 const port = 4000
@@ -21,14 +18,20 @@ app.use(cors())
 // db connection
 connectDB();
 
-// api endpoints
-app.use("/api/food",foodRouter)
-app.use("/images",express.static('uploads'))
-app.use("/api/user",userRouter)
-app.use("/api/cart",cartRouter)
-app.use("/api/order",orderRouter)
+// Dynamic directory selection for Vercel vs Local
+const uploadDir = process.env.VERCEL ? "/tmp" : "uploads";
 
-app.get("/",(req,res)=>{
+// api endpoints
+app.use("/api/food", foodRouter)
+
+// FIXED: Dynamically serve uploaded images from /tmp on Vercel or uploads locally
+app.use("/images", express.static(uploadDir))
+
+app.use("/api/user", userRouter)
+app.use("/api/cart", cartRouter)
+app.use("/api/order", orderRouter)
+
+app.get("/", (req, res) => {
     res.send("API Working")
 })
 
