@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon server.js"
   },
-  "author": "",
+  "author": "Goutam Gupta(inspirational Scientificance)",
   "license": "ISC",
   "description": "",
   "dependencies": {
