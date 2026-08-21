@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server Started on port $ https://food-dev-backend-seven.vercel.app`);
+    console.log(`Server Started on port ${PORT}`);
 });
 
 export default app;
