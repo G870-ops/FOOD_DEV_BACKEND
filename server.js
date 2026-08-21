@@ -1,41 +1,37 @@
-import express from "express"
-import cors from "cors"
-import {connectDB} from "./config/db.js"
-import foodRouter from "./routes/foodRoute.js"
-import userRouter from "./routes/userRoute.js"
-import cartRouter from "./routes/cartRoute.js"
-import 'dotenv/config'
-import orderRouter from "./routes/orderRoute.js"
+import express from "express";
+import cors from "cors";
+import { connectDB } from "./config/db.js";
+import foodRouter from "./routes/foodRoute.js";
+import userRouter from "./routes/userRoute.js";
+import cartRouter from "./routes/cartRoute.js";
+import 'dotenv/config';
+import orderRouter from "./routes/orderRoute.js";
 
+// App Config
+const app = express();
+const PORT = process.env.PORT || 4000;
 
+// Middleware
+app.use(express.json());
+app.use(cors());
 
-
-// app config
-const app = express()
-const port = 4000
-
-// middleware
-app.use(express.json())
-app.use(cors())
-
-// db connection
+// Database Connection
 connectDB();
 
-// api endpoints
-app.use("/api/food",foodRouter)
-app.use("/images",express.static('uploads'))
-app.use("/api/user",userRouter)
-app.use("/api/cart",cartRouter)
-app.use("/api/order",orderRouter)
+// API Endpoints
+app.use("/api/food", foodRouter);
+app.use("/images", express.static('uploads')); 
+app.use("/api/user", userRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
 
-app.get("/",(req,res)=>{
-    res.send("API Working")
-})
+app.get("/", (req, res) => {
+    res.send("API Working");
+});
 
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(4000, () => {
-        console.log('Server Started on http://localhost:4000');
-    });
-}
+
+app.listen(PORT, () => {
+    console.log(`Server Started on port $ https://food-dev-backend-seven.vercel.app`);
+});
 
 export default app;
